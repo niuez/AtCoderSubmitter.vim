@@ -1,5 +1,12 @@
 # AtCoderSubmitter.vim
 
+## Dependencies
+[nvim-yarp](https://github.com/roxma/nvim-yarp)
+
+BeautifulSoup(python3)
+
+requests(python3)
+
 ## Setting
 
 Set environment variables `$ATCODER_USERNAME` and `$ATCODER_PASSWORD`

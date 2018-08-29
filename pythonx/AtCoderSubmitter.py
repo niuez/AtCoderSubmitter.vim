@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 
 session = requests.Session()
 
+def LoggedInCheck():
+    return vim.vars["AtCoderSubmitter#LoggedIn"] == 0
+
 def LoginSession(payload):
     r = session.get('https://beta.atcoder.jp/login')
     soup = BeautifulSoup(r.text,"html.parser")
@@ -19,6 +22,7 @@ def Login(username,password):
             'password' : password
             }
     LoginSession(payload)
+    vim.vars["AtCoderSubmitter#LoggedIn"] = 1
 
 def Submit(contest_id,problem_id,source):
     submit_page = session.get('https://beta.atcoder.jp/contests/%s/submit' % contest_id)
@@ -33,6 +37,9 @@ def Submit(contest_id,problem_id,source):
     result = session.post('https://beta.atcoder.jp/contests/%s/submit' % contest_id ,data = submit_data)
 
 def SubmitCode(contest_id,problem_id):
+    if not LoggedInCheck():
+        print("AtCoderSubmitter is not logged in.")
+        return
     source = '\n'.join(vim.eval('getline(0,"$")'))
     Submit(contest_id,problem_id,source)
 
@@ -50,4 +57,7 @@ def ShowSubmissions(url,args):
 
 
 def MySubmissions(contest_id):
+    if not LoggedInCheck():
+        print("AtCoderSubmitter is not logged in.")
+        return
     ShowSubmissions('https://beta.atcoder.jp/contests/%s/submissions/me' % contest_id,{})

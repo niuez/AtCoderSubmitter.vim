@@ -3,6 +3,7 @@ if exists('g:loaded_atcoder_submitter')
 endif
 
 let g:loaded_atcoder_submitter = 1
+let g:AtCoderSubmitter#LoggedIn = 0
 
 scriptencoding utf-8
 

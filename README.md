@@ -7,6 +7,8 @@ BeautifulSoup(python3)
 
 requests(python3)
 
+neovim(python3) --> `pip3 install neovim`
+
 ## Setting
 
 Set environment variables `$ATCODER_USERNAME` and `$ATCODER_PASSWORD`

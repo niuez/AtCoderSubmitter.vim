@@ -37,11 +37,19 @@ function g:AtCoderSubmitter#Submit()
   endif
 endfunction
 
-com ACSubmit call g:AtCoderSubmitter#Submit()
-
 function g:AtCoderSubmitter#Login()
   call s:submitter.request('Login',$ATCODER_USERNAME,$ATCODER_PASSWORD)
 endfunction
+
+function g:AtCoderSubmitter#MySubmissions()
+  let contest_id = input('contest_id :')
+  call s:submitter.request('MySubmissions',contest_id)
+endfunction
+
+com ACSubmit call g:AtCoderSubmitter#Submit()
+com ACLogin call g:AtCoderSubmitter#Login()
+com ACMySubmissions call g:AtCoderSubmitter#MySubmissions()
+
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

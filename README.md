@@ -1,6 +1,6 @@
 # AtCoderSubmitter.vim
 
-This is BETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+This is ALPHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ## Dependencies
 [nvim-yarp](https://github.com/roxma/nvim-yarp)

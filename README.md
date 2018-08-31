@@ -79,8 +79,8 @@ Set `g:AtCoderSubmitter#LanguageID`
 ## Example
 
 ```
-:call AtCoderSubmitter#Login()
-:call AtCoderSubmitter#Submit()
+:ACLogin
+:ACSubmit
 contest_id :arc101
 problem_id :arc101_a
 OK? [y/n] :y

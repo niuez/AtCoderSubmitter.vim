@@ -27,6 +27,7 @@ function! s:input(...) abort
 endfunction
 
 let g:AtCoderSubmitter#LanguageID = 3003
+let g:AtCoderSubmitter#LoggedIn = 0
 
 
 function g:AtCoderSubmitter#Submit()
@@ -34,7 +35,6 @@ function g:AtCoderSubmitter#Submit()
   let problem_id = input('problem_id :')
   if input('OK? [y/n] :') == 'y'
     call s:submitter.request('SubmitCode',contest_id,problem_id)
-    echo 'Submmit'
   endif
 endfunction
 

@@ -5,8 +5,11 @@ from bs4 import BeautifulSoup
 
 session = requests.Session()
 
-def LoggedInCheck():
-    return vim.vars["AtCoderSubmitter#LoggedIn"] == 0
+def vimecho(args):
+    vim.command('echo \"' + args + '\"')
+
+def IsLoggedIn():
+    return vim.vars["AtCoderSubmitter#LoggedIn"] == 1
 
 def LoginSession(payload):
     r = session.get('https://beta.atcoder.jp/login')
@@ -35,13 +38,15 @@ def Submit(contest_id,problem_id,source):
     csrf_token = soup.find(attrs = {'name' : 'csrf_token'}).get('value')
     submit_data['csrf_token'] = csrf_token
     result = session.post('https://beta.atcoder.jp/contests/%s/submit' % contest_id ,data = submit_data)
+    return 1
 
 def SubmitCode(contest_id,problem_id):
-    if not LoggedInCheck():
-        print("AtCoderSubmitter is not logged in.")
+    if not IsLoggedIn():
+        vimecho("AtCoderSubmitter is not logged in.")
         return
     source = '\n'.join(vim.eval('getline(0,"$")'))
-    Submit(contest_id,problem_id,source)
+    if Submit(contest_id,problem_id,source) == 1:
+        vimecho('Submit')
 
 def ShowSubmissions(url,args):
     soup = BeautifulSoup(session.get(url , data = args).text,"html.parser")
@@ -57,7 +62,7 @@ def ShowSubmissions(url,args):
 
 
 def MySubmissions(contest_id):
-    if not LoggedInCheck():
-        print("AtCoderSubmitter is not logged in.")
+    if not IsLoggedIn():
+        vimecho("AtCoderSubmitter is not logged in.")
         return
     ShowSubmissions('https://beta.atcoder.jp/contests/%s/submissions/me' % contest_id,{})

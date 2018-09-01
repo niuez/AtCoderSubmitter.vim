@@ -38,7 +38,7 @@ def Submit(contest_id,problem_id,source):
     csrf_token = soup.find(attrs = {'name' : 'csrf_token'}).get('value')
     submit_data['csrf_token'] = csrf_token
     result = session.post('https://beta.atcoder.jp/contests/%s/submit' % contest_id ,data = submit_data)
-    return 1
+    return result.status_code == requests.codes.ok
 
 def SubmitCode(contest_id,problem_id):
     if not IsLoggedIn():

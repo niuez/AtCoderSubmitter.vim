@@ -31,20 +31,26 @@ let g:AtCoderSubmitter#LoggedIn = 0
 
 
 function g:AtCoderSubmitter#Submit()
-  let contest_id = input('contest_id :')
-  let problem_id = input('problem_id :')
-  if input('OK? [y/n] :') == 'y'
-    call s:submitter.request('SubmitCode',contest_id,problem_id)
+  let contest_id = ""
+  let problem_id = ""
+  if exists('g:AtCoderSubmitter#ContestID')
+    let contest_id = g:AtCoderSubmitter#ContestID
+    let problem_code = input('problem_code: ')
+    let problem_id = contest_id . '_' . problem_code
+  else
+    let contest_id = input('contest_id: ')
+    let problem_id = input('problem_id: ')
   endif
+  call s:submitter.notify('SubmitCode',contest_id,problem_id)
 endfunction
 
 function g:AtCoderSubmitter#Login()
-  call s:submitter.request('Login',$ATCODER_USERNAME,$ATCODER_PASSWORD)
+  call s:submitter.notify('Login',$ATCODER_USERNAME,$ATCODER_PASSWORD)
 endfunction
 
 function g:AtCoderSubmitter#MySubmissions()
   let contest_id = input('contest_id :')
-  call s:submitter.request('MySubmissions',contest_id)
+  call s:submitter.notify('MySubmissions',contest_id)
 endfunction
 
 com ACSubmit call g:AtCoderSubmitter#Submit()

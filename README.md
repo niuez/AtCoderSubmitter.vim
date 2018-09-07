@@ -86,3 +86,8 @@ problem_id :arc101_a
 OK? [y/n] :y
 Submit
 ```
+
+
+## AtCoderSubmitter Easy Mode (by [keidaroo](https://github.com/keidaroo) )
+
+Take a look at it in [AtCoderSubmitter EasyMode](https://github.com/keidaroo/AtcoderSubmitter_Easymode)

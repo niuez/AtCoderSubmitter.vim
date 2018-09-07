@@ -29,11 +29,18 @@ endfunction
 let g:AtCoderSubmitter#LanguageID = 3003
 let g:AtCoderSubmitter#LoggedIn = 0
 
-
 function g:AtCoderSubmitter#Submit()
   let contest_id = ""
   let problem_id = ""
-  if exists('g:AtCoderSubmitter#ContestID')
+
+	if exists('g:AtcoderSubmitter#EasySubmitMode')&& g:AtcoderSubmitter#EasySubmitMode == 1
+		call s:submitter.notify('EasySubmit')
+		return
+	else
+		echo "hoge"
+	endif
+
+  if exists('g:AtCoderSubmitter#ContestID')	
     let contest_id = g:AtCoderSubmitter#ContestID
     let problem_code = input('problem_code: ')
     let problem_id = contest_id . '_' . problem_code

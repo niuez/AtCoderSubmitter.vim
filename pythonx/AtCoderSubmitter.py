@@ -66,3 +66,14 @@ def MySubmissions(contest_id):
         vimecho("AtCoderSubmitter is not logged in.")
         return
     ShowSubmissions('https://beta.atcoder.jp/contests/%s/submissions/me' % contest_id,{})
+
+def EasySubmit():
+    responce = requests.get('http://localhost:8080/')
+
+    if responce.status_code != 200:
+        vimecho("Oops! You have to turn on your server first. Take a look at README to solve it")    
+    else:
+        responceList=responce.text.split(' ')
+        SubmitCode(responceList[0],responceList[1])
+
+        

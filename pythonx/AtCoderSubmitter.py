@@ -42,7 +42,7 @@ def Submit(contest_id,problem_id,source):
 
 def SubmitCode(contest_id,problem_id):
     if not IsLoggedIn():
-        vimecho("AtCoderSubmitter is not logged in.aaa"+vim.vars["g:AtcoderSubmitter#EasySubmitMode"])
+        vimecho("AtCoderSubmitter is not logged in.")
         return
     source = '\n'.join(vim.eval('getline(0,"$")'))
     if Submit(contest_id,problem_id,source) == 1:
@@ -63,14 +63,17 @@ def ShowSubmissions(url,args):
 
 def MySubmissions(contest_id):
     if not IsLoggedIn():
-        vimecho("AtCoderSubmitter is not logged in.aa")
+        vimecho("AtCoderSubmitter is not logged in.")
         return
     ShowSubmissions('https://beta.atcoder.jp/contests/%s/submissions/me' % contest_id,{})
 
 def EasySubmit():
-    response = requests.get('http://localhost:8080/')
+    responce = requests.get('http://localhost:8080/')
 
-    if response.status_code == 102:
+    if responce.status_code != 200:
         vimecho("Oops! You have to turn on your server first. Take a look at README to solve it")    
     else:
-        vimecho(response.text)
+        responceList=responce.text.split(' ')
+        SubmitCode(responceList[0],responceList[1])
+
+        
